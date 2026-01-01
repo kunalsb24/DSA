@@ -24,7 +24,7 @@ int maxCuts(int n, int a, int b, int c) {
         return -1;
 
     // Add 1 to the valid maximum result
-    return res + 1;
+    return res + 1; 
 }
 
 int main() {
