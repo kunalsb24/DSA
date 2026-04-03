@@ -1,4 +1,5 @@
 #include<iostream>
+#include <vector>
 using namespace std;
 
 // Given unsorted integers, find the peak element in the array
@@ -32,6 +33,27 @@ int peak(int arr[], int n){
     }
     return -1;
 }
+
+
+int findPeakElement(vector<int>& nums) {
+    int low = 0;
+    int high = nums.size() - 1;
+
+    while (low < high) {
+        int mid = low + (high - low) / 2;
+
+        if (nums[mid] < nums[mid + 1]) {
+            // Peak is on the right side
+            low = mid + 1;
+        } else {
+            // Peak is on the left side (including mid)
+            high = mid;
+        }
+    }
+
+    return low; // or high (both are same here)
+}
+
 
 int main(){
     int n =5, arr[] = {6,7,8,20,12};
