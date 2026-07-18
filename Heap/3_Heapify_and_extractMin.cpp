@@ -18,6 +18,7 @@ class MinHeap{
     int right(int i) { return (2*i + 2); } 
     int parent(int i) { return (i-1)/2; } 
     
+    // Insert
     void insert(int x) 
     { 
     if (size == capacity)return;
@@ -30,16 +31,44 @@ class MinHeap{
        i = parent(i); 
     } 
     }
+    
+    // Heapify
 
-    void print() {
-    for (int i = 0; i < size; i++)
-        cout << arr[i] << " ";
-    cout << endl;
-}
+    void minHeapify(int i) 
+    { 
+    int lt = left(i); 
+    int rt = right(i); 
+    int smallest = i; 
+    if (lt < size && arr[lt] < arr[i]) 
+        smallest = lt; 
+    if (rt < size && arr[rt] < arr[smallest]) 
+        smallest = rt; 
+    if (smallest != i) 
+    { 
+        swap(arr[i],arr[smallest]); 
+        minHeapify(smallest); 
+    } 
+    }
+
+    // Extract Min
+    
+    int extractMin() 
+    { 
+    if (size <= 0) 
+        return INT_MAX; 
+    if (size == 1) 
+    { 
+        size--; 
+        return arr[0]; 
+    }  
+    swap(arr[0],arr[size-1]);
+    size--; 
+    minHeapify(0); 
+  
+    return arr[size]; 
+    } 
     
 };
-
-
 
 int main() 
 { 
@@ -48,7 +77,6 @@ int main()
     h.insert(2);
     h.insert(15);
     h.insert(20);
-    h.insert(5);
-    h.print();
+    cout << h.extractMin() << " ";
     return 0;
 } 
